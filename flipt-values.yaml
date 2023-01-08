@@ -1,0 +1,33 @@
+# https://github.com/flipt-io/helm-charts/blob/main/charts/flipt/values.yaml
+service:
+  type: NodePort
+  httpPort: 8084
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 2Gi
+  requests:
+    cpu: 1000m
+    memory: 1Gi
+
+## Persistence Parameters
+## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
+##
+persistence:
+  ## enabled enables persistence using Persistent Volume Claims
+  enabled: true  
+  existingClaim: "flipt-ebs-claim" 
+  ## size is the Persistent Volume size
+  size: 5Gi
+
+flipt:
+  extraEnvVars:
+    - name: FLIPT_DB_URL
+      value: mysql://root:Dylhv5WnNY6SM9sH@mysql.flipt.svc.cluster.local:3306/flipt
+    - name: FLIPT_LOG_LEVEL
+      value: debug
+    # - name: FLIPT_AUTHENTICATION_REQUIRED
+    #   value: "true"
+    # - name: FLIPT_AUTHENTICATION_METHODS_TOKEN_ENABLED
+    #   value: "true"
