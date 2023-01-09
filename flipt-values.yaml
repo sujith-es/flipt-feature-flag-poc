@@ -1,4 +1,14 @@
 # https://github.com/flipt-io/helm-charts/blob/main/charts/flipt/values.yaml
+
+replicaCount: 1
+
+image:
+  repository: flipt/flipt
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  # tag: "v1.16.0" # Installed
+  tag: "v1.17-rc3"
+
 service:
   type: NodePort
   httpPort: 8084
